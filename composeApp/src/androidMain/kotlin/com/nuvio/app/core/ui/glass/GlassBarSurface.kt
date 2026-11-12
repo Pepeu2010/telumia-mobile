@@ -5,6 +5,7 @@ import android.graphics.RuntimeShader
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -20,24 +21,25 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
+import com.nuvio.app.core.ui.nuvio
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeTint
 import dev.chrisbanes.haze.hazeEffect
 
-private val GlassSurfaceColor = Color(0xFF1C1C1E)
-
 @Composable
 internal fun GlassBarSurface(hazeState: HazeState?, modifier: Modifier = Modifier, glowStrength: Float = 1f) {
+    val surfaceColor = MaterialTheme.nuvio.colors.surface
+    val accentColor = MaterialTheme.nuvio.colors.accent
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && hazeState?.blurEnabled == true && glowStrength > 0f) {
-        RefractedGlassBar(hazeState, modifier, glowStrength)
+        RefractedGlassBar(hazeState, modifier, glowStrength, surfaceColor)
     } else {
         Box(
             modifier
-                .then(if (hazeState != null) Modifier.barBackdrop(hazeState) else Modifier)
+                .then(if (hazeState != null) Modifier.barBackdrop(hazeState, surfaceColor) else Modifier)
                 .drawWithCache {
-                    val fill = GlassSurfaceColor.copy(alpha = if (hazeState != null) 0.55f else 0.82f)
+                    val fill = surfaceColor.copy(alpha = if (hazeState != null) 0.72f else 0.94f)
                     val edge = Brush.verticalGradient(
-                        listOf(Color.White.copy(alpha = 0.27f), Color.White.copy(alpha = 0.02f)),
+                        listOf(accentColor.copy(alpha = 0.38f), Color.White.copy(alpha = 0.06f)),
                     )
                     val width = 0.75.dp.toPx()
                     onDrawBehind {
@@ -58,7 +60,7 @@ internal fun GlassBarSurface(hazeState: HazeState?, modifier: Modifier = Modifie
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
-private fun RefractedGlassBar(hazeState: HazeState, modifier: Modifier, glowStrength: Float) {
+private fun RefractedGlassBar(hazeState: HazeState, modifier: Modifier, glowStrength: Float, surfaceColor: Color) {
     val shader = remember { RuntimeShader(GlassBarShader) }
     Box(
         modifier
@@ -76,13 +78,13 @@ private fun RefractedGlassBar(hazeState: HazeState, modifier: Modifier, glowStre
                 shader.setFloatUniform("glowStrength", glowStrength)
                 renderEffect = RenderEffect.createRuntimeShaderEffect(shader, "backdrop").asComposeRenderEffect()
             }
-            .barBackdrop(hazeState),
+            .barBackdrop(hazeState, surfaceColor),
     )
 }
 
-private fun Modifier.barBackdrop(hazeState: HazeState): Modifier = hazeEffect(state = hazeState) {
+private fun Modifier.barBackdrop(hazeState: HazeState, surfaceColor: Color): Modifier = hazeEffect(state = hazeState) {
     blurRadius = 24.dp
-    backgroundColor = GlassSurfaceColor
+    backgroundColor = surfaceColor
     tints = listOf(HazeTint(Color.Transparent))
     noiseFactor = 0f
 }

@@ -68,7 +68,7 @@ internal actual fun FloatingNavigationBar(
     )
     val tokens = MaterialTheme.nuvio
     val accentColor = tokens.colors.accent
-    val selectedSurface = accentColor.copy(alpha = NuvioTokens.Opacity.selected)
+    val selectedSurface = accentColor.copy(alpha = 0.20f)
     val labelFraction by animateFloatAsState(
         targetValue = scrollState?.labelVisibility ?: 1f,
         animationSpec = tween(NuvioTokens.Motion.sheetEnterMillis, easing = NuvioTokens.Motion.standard),
