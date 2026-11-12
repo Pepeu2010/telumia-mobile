@@ -1,55 +1,36 @@
-<div align="center">
+# Telumia Mobile
 
-  <img src="https://nuvio.tv/assets/nuvio-app-logo-wordmark.webp" alt="Nuvio" width="320" />
+![Telumia](https://raw.githubusercontent.com/Pepeu2010/telumia/main/assets/brand/telumia-banner.png)
 
-  <p>
-    A free, open-source media app for your phone, your desktop, and the TV you already own.
-    <br />
-    Bring your own sources. Nuvio turns them into a library with artwork, ratings, subtitles, and your place saved on every screen.
-  </p>
+**Seu cinema, suas séries e novelas — com foco no Brasil.** Cliente nativo Telumia para Android (APK), desenvolvido sobre a infraestrutura do Nuvio Mobile com Kotlin Multiplatform e Compose. Faz parte do projeto Telumia, junto de [Telumia TV](https://github.com/Pepeu2010/telumia-tv) e [Telumia Desktop](https://github.com/Pepeu2010/telumia-desktop).
 
-  [Website](https://nuvio.tv) · [GitHub releases](https://github.com/NuvioMedia/NuvioMobile/releases/latest) · [Support Nuvio](https://nuvio.tv/support)
+## Estado
 
-</div>
+Início do desenvolvimento. A base é o [NuvioMedia/NuvioMobile](https://github.com/NuvioMedia/NuvioMobile) (`cmp-rewrite`, commit `e9f136b`), com identidade própria: nome **Telumia**, `applicationId` `io.github.pepeu2010.telumia.mobile`, ícone e paleta padrão (azul quase preto com âmbar e coral). Nenhuma release foi publicada e o redesign das telas ainda não foi implementado; o APK ainda não foi validado em aparelho.
 
-## Get Nuvio Mobile
+## Login
 
-- [Android on Google Play](https://play.google.com/store/apps/details?id=com.nuvio.app)
-- [Android APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest)
-- iOS via AltStore or SideStore: add [this source URL](https://raw.githubusercontent.com/NuvioMedia/NuvioMobile/cmp-rewrite/store.json) in the app's Sources section, then install Nuvio.
+O app **sempre** usa o login do Nuvio original: mesmo backend e mesmo fluxo de conta, preservando contas, biblioteca e progresso. O módulo está em `composeApp/src/commonMain/kotlin/com/nuvio/app/core/auth/` e `core/network/SupabaseProvider.kt`; os links `nuvio://auth` foram mantidos de propósito. Não crie um sistema de contas paralelo nem altere o contrato de autenticação.
 
-## Build from source
+## Direção visual
 
-```bash
-git clone https://github.com/NuvioMedia/NuvioMobile.git
-cd NuvioMobile
-```
+Tema escuro, âmbar como acento, destaque em tela cheia, barra inferior flutuante e alvos de toque de 48dp. As telas e o design system estão no [projeto central](https://github.com/Pepeu2010/telumia) (`design-system/`).
 
-### Android
+## Compilar
 
-Android development requires Android Studio and the Android SDK.
+Requer JDK 17 e Android SDK 36. Crie `local.properties` (ignorado pelo Git) com `sdk.dir`, `NUVIO_SUPABASE_URL` e `NUVIO_SUPABASE_ANON_KEY` (mesmo backend do Nuvio, também usado pelo Telumia TV). Não publique credenciais nem keystores.
 
-```bash
+```sh
 ./gradlew :androidApp:assembleFullDebug
 ```
 
-### iOS
+## Sincronizar com o upstream
 
-iOS development requires macOS and Xcode.
-
-```bash
-env NUVIO_IOS_DISTRIBUTION=full xcodebuild \
-  -project iosApp/iosApp.xcodeproj \
-  -scheme iosApp \
-  -configuration Debug \
-  -sdk iphonesimulator \
-  -derivedDataPath build/ios-derived-full-simulator \
-  CODE_SIGNING_ALLOWED=NO \
-  build
+```sh
+git fetch upstream cmp-rewrite
+git merge upstream/cmp-rewrite
 ```
 
-The shared app is built with Kotlin Multiplatform and Compose Multiplatform.
+## Licença
 
-## License
-
-[GNU General Public License v3.0](./LICENSE)
+[GPL-3.0](LICENSE). Copyrights, autoria e avisos de terceiros preservados. [Créditos do código](FORK_NOTICE.md).

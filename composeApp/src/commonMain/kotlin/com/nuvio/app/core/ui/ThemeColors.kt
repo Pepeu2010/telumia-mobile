@@ -19,23 +19,23 @@ data class ThemeColorPalette(
 object ThemeColors {
 
     val Gold = ThemeColorPalette(
-        secondary = Color(0xFFE8A91C),
-        secondaryVariant = Color(0xFF9A6200),
+        secondary = Color(0xFFF2A93B),
+        secondaryVariant = Color(0xFFEE6A55),
         accentGradient = listOf(
-            Color(0xFF8A5700),
-            Color(0xFFE8A91C),
-            Color(0xFFFFF1A8),
-            Color(0xFFFFD45C),
-            Color(0xFF9A6200),
+            Color(0xFFEE6A55),
+            Color(0xFFF2A93B),
+            Color(0xFFFFC565),
+            Color(0xFFF2A93B),
+            Color(0xFFEE6A55),
         ),
-        nativeAccentHex = "#FFD45C",
-        onSecondary = Color(0xFF111111),
-        onSecondaryVariant = Color.White,
-        focusRing = Color(0xFFFFD45C),
+        nativeAccentHex = "#FFC565",
+        onSecondary = Color(0xFF241502),
+        onSecondaryVariant = Color(0xFF2A0D07),
+        focusRing = Color(0xFFFFC565),
         focusBackground = Color(0xFF3D2D1A),
-        background = Color(0xFF0F0E0B),
-        backgroundElevated = Color(0xFF1D1A14),
-        backgroundCard = Color(0xFF262116),
+        background = Color(0xFF0B0F1A),
+        backgroundElevated = Color(0xFF161C2D),
+        backgroundCard = Color(0xFF1C2438),
     )
 
     val Jade = ThemeColorPalette(
