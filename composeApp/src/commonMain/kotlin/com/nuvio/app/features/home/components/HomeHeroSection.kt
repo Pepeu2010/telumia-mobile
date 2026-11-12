@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.nuvio.app.core.ui.focusedAlignment
+import com.nuvio.app.core.ui.nuvio
 import com.nuvio.app.core.ui.rememberBackdropFocusState
 import com.nuvio.app.core.ui.revealAlpha
 import com.nuvio.app.core.ui.heroStretchHeight
@@ -275,8 +276,8 @@ fun HomeHeroSection(
                         .background(
                             Brush.radialGradient(
                                 colors = listOf(
-                                    MaterialTheme.colorScheme.secondary.copy(alpha = 0.14f),
-                                    MaterialTheme.colorScheme.secondary.copy(alpha = 0f),
+                                    MaterialTheme.nuvio.colors.accent.copy(alpha = 0.14f),
+                                    MaterialTheme.nuvio.colors.accent.copy(alpha = 0f),
                                 ),
                                 center = androidx.compose.ui.geometry.Offset(
                                     heroWidthPx / 2f,
@@ -386,7 +387,7 @@ fun HomeHeroSection(
                                         .background(
                                             lerp(
                                                 MaterialTheme.colorScheme.onBackground,
-                                                MaterialTheme.colorScheme.secondary,
+                                                MaterialTheme.nuvio.colors.accent,
                                                 activeFraction,
                                             ),
                                         )

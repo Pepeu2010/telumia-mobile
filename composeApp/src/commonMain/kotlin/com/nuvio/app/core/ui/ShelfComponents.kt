@@ -292,8 +292,8 @@ private fun NuvioShelfSectionHeader(
                     .background(
                         brush = androidx.compose.ui.graphics.Brush.verticalGradient(
                             listOf(
-                                MaterialTheme.colorScheme.secondary,
-                                MaterialTheme.colorScheme.secondary.copy(alpha = 0.45f),
+                                MaterialTheme.nuvio.colors.accent,
+                                MaterialTheme.nuvio.colors.accent.copy(alpha = 0.45f),
                             ),
                         ),
                         shape = RoundedCornerShape(2.dp),
