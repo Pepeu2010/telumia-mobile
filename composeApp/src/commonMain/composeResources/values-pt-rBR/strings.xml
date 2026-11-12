@@ -2556,4 +2556,6 @@
     <string name="settings_playback_page_up_next">A seguir</string>
     <string name="compose_settings_page_layout">Layout</string>
     <string name="settings_group_you">Você</string>
+    <string name="telumia_auth_synced">SINCRONIZADO</string>
+    <string name="telumia_auth_synced_title">Continue de onde parou</string>
 </resources>

@@ -367,7 +367,7 @@
     <string name="compose_auth_sign_up_subtitle">Sign up to sync your data across devices</string>
     <string name="compose_auth_sign_up">Sign Up</string>
     <string name="compose_auth_store_locally">Your data will only be stored locally</string>
-    <string name="compose_auth_tagline">Watch your library, anywhere</string>
+    <string name="compose_auth_tagline">Seu cinema, suas séries e novelas</string>
     <string name="compose_auth_terms_prefix">By signing up, I agree to the</string>
     <string name="compose_auth_terms_link">Terms</string>
     <string name="compose_auth_welcome_back">Welcome Back</string>
@@ -2559,4 +2559,6 @@
     <string name="subtitle_shadow_opacity">Shadow opacity</string>
     <string name="subtitle_shadow_size">Shadow size</string>
     <string name="subtitle_reset_appearance">Reset appearance</string>
+    <string name="telumia_auth_synced">SYNCED</string>
+    <string name="telumia_auth_synced_title">Pick up where you left off</string>
 </resources>

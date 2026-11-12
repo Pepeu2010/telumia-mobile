@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
@@ -57,6 +59,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
@@ -82,6 +85,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nuvio.composeapp.generated.resources.telumia_auth_synced_title
+import nuvio.composeapp.generated.resources.telumia_auth_synced
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nuvio.app.core.auth.AuthRepository
 import com.nuvio.app.core.auth.DeviceLinkAuthRepository
@@ -115,8 +122,8 @@ import org.jetbrains.compose.resources.stringResource
 internal val AuthTextPrimary = Color(0xFFF5F7F8)
 internal val AuthTextSecondary = Color(0xFF969CA3)
 private val AuthTextMuted = Color(0xFF6E7178)
-private val AuthPrimaryButtonBackground = Color(0xFFF5F5F5)
-private val AuthPrimaryButtonText = Color(0xFF111111)
+private val AuthPrimaryButtonBackground = Color(0xFFF2A93B)
+private val AuthPrimaryButtonText = Color(0xFF241502)
 internal val AuthFieldBackground = Color.White.copy(alpha = 0.04f)
 private val AuthFieldBackgroundMobile = Color.White.copy(alpha = 0.035f)
 internal val AuthFieldBorder = Color.White.copy(alpha = 0.08f)
@@ -433,13 +440,41 @@ private fun AuthMobileLayout(
     onEmailBoundsChange: (Rect) -> Unit,
     onPasswordBoundsChange: (Rect) -> Unit,
 ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .align(Alignment.TopStart)
+            .fillMaxWidth()
+            .height(430.dp)
+            .clipToBounds(),
+    ) {
+        AuthPosterMosaic(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .offset(x = (-44).dp, y = (-80).dp),
+        )
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(430.dp)
+            .background(
+                Brush.verticalGradient(
+                    colorStops = arrayOf(
+                        0f to Color(0x470B0F1A),
+                        0.55f to Color(0x990B0F1A),
+                        0.86f to Color(0xFF0B0F1A),
+                    ),
+                ),
+            ),
+    )
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(
                 start = 30.dp,
-                top = statusBarTop + 48.dp,
+                top = statusBarTop + 232.dp,
                 end = 30.dp,
                 bottom = 40.dp,
             ),
@@ -449,11 +484,11 @@ private fun AuthMobileLayout(
             modifier = Modifier
                 .widthIn(max = 342.dp)
                 .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
         ) {
-            AuthBrandLockup(logoHeight = 38.dp)
+            AuthBrandLockup(logoHeight = 34.dp, alignStart = true, showTagline = false)
 
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             AuthHeading(
                 isSignUp = isSignUp,
@@ -495,6 +530,12 @@ private fun AuthMobileLayout(
                 onPasswordBoundsChange = onPasswordBoundsChange,
             )
         }
+    }
+    AuthSyncCard(
+        modifier = Modifier
+            .align(Alignment.TopStart)
+            .padding(start = 30.dp, end = 30.dp, top = statusBarTop + 120.dp),
+    )
     }
 }
 
@@ -632,14 +673,17 @@ private fun AuthLargeLayout(
 @Composable
 private fun AuthBrandLockup(
     logoHeight: Dp,
+    alignStart: Boolean = false,
+    showTagline: Boolean = true,
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = if (alignStart) Alignment.Start else Alignment.CenterHorizontally,
     ) {
         AppBrandWordmark(
             contentDescription = null,
             modifier = Modifier.height(logoHeight),
         )
+        if (!showTagline) return@Column
         Spacer(modifier = Modifier.height(14.dp))
         Text(
             text = stringResource(Res.string.compose_auth_tagline),
@@ -1148,23 +1192,23 @@ private fun Modifier.authGradientBackground(largeScreen: Boolean): Modifier = dr
     )
     val colorStops = if (largeScreen) {
         arrayOf(
-            0f to Color(0xFF21113B),
-            0.14f to Color(0xFF21113B),
-            0.26f to Color(0xFF1A0E2F),
-            0.36f to Color(0xFF130A23),
-            0.48f to Color(0xFF0A060F),
-            0.60f to Color(0xFF050408),
+            0f to Color(0xFF1C2540),
+            0.14f to Color(0xFF1C2540),
+            0.26f to Color(0xFF141B30),
+            0.36f to Color(0xFF0F1424),
+            0.48f to Color(0xFF0B0F1A),
+            0.60f to Color(0xFF090C16),
             0.70f to Color.Black,
             1f to Color.Black,
         )
     } else {
         arrayOf(
-            0f to Color(0xFF21113B),
-            0.12f to Color(0xFF21113B),
-            0.24f to Color(0xFF1A0E2F),
-            0.34f to Color(0xFF130A23),
-            0.44f to Color(0xFF0A060F),
-            0.58f to Color(0xFF050408),
+            0f to Color(0xFF1C2540),
+            0.12f to Color(0xFF1C2540),
+            0.24f to Color(0xFF141B30),
+            0.34f to Color(0xFF0F1424),
+            0.44f to Color(0xFF0B0F1A),
+            0.58f to Color(0xFF090C16),
             0.64f to Color.Black,
             1f to Color.Black,
         )
@@ -1187,4 +1231,109 @@ private fun LayoutCoordinates.boundsInRoot(): Rect {
         right = position.x + size.width,
         bottom = position.y + size.height,
     )
+}
+
+private val AuthMosaicGradients = listOf(
+    Color(0xFF5A3A22) to Color(0xFFC98A3D),
+    Color(0xFF1F3A4D) to Color(0xFF4F8AA6),
+    Color(0xFF4A2230) to Color(0xFFD0605A),
+    Color(0xFF2B3A2A) to Color(0xFF8AA35A),
+    Color(0xFF2A2650) to Color(0xFF7A6FD0),
+    Color(0xFF3B3B3B) to Color(0xFF9A948A),
+)
+
+/** Decorative poster mosaic (gradients, no artwork) from the Telumia Login design. */
+@Composable
+private fun AuthPosterMosaic(modifier: Modifier = Modifier) {
+    val columns = listOf(
+        listOf(4 to 170, 1 to 150, 2 to 170),
+        listOf(0 to 150, 5 to 180, 3 to 150),
+        listOf(2 to 180, 4 to 150, 1 to 170),
+        listOf(3 to 150, 0 to 170, 5 to 160),
+    )
+    val offsets = listOf(0, -46, 20, -20)
+    Row(
+        modifier = modifier
+            .requiredWidth(480.dp)
+            .graphicsLayer {
+                rotationZ = -9f
+                alpha = 0.85f
+            },
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        columns.forEachIndexed { index, tiles ->
+            Column(
+                modifier = Modifier.offset(y = offsets[index].dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                tiles.forEach { (gradient, height) ->
+                    val (from, to) = AuthMosaicGradients[gradient]
+                    Box(
+                        modifier = Modifier
+                            .width(112.dp)
+                            .height(height.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Brush.linearGradient(listOf(from, to))),
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AuthSyncCard(modifier: Modifier = Modifier) {
+    val shape = RoundedCornerShape(18.dp)
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .background(Color(0xE0161C2D))
+            .border(1.dp, Color(0x1FF6EBD6), shape)
+            .padding(10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(56.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(Brush.linearGradient(listOf(Color(0xFF2B3A2A), Color(0xFF8AA35A)))),
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = stringResource(Res.string.telumia_auth_synced),
+                color = Color(0xFFFFC565),
+                fontSize = 11.sp,
+                lineHeight = 14.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.5.sp,
+            )
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = stringResource(Res.string.telumia_auth_synced_title),
+                color = AuthTextPrimary,
+                fontSize = 13.sp,
+                lineHeight = 18.sp,
+                fontWeight = FontWeight.Medium,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Spacer(modifier = Modifier.height(6.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(4.dp)
+                    .clip(RoundedCornerShape(2.dp))
+                    .background(Color(0x1FF6EBD6)),
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f)
+                        .fillMaxHeight()
+                        .background(Color(0xFFF2A93B)),
+                )
+            }
+        }
+    }
 }
