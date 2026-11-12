@@ -44,6 +44,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.util.VelocityTracker
@@ -83,7 +85,7 @@ private const val HERO_SCROLL_MAX_SCALE = 1.3f
 private const val HERO_SWIPE_THRESHOLD_FRACTION = 0.16f
 private const val HERO_SWIPE_VELOCITY_THRESHOLD = 300f
 private const val HERO_AUTO_SCROLL_INTERVAL_MS = 8_000L
-private const val MOBILE_HERO_VIEWPORT_RATIO = 0.82f
+private const val MOBILE_HERO_VIEWPORT_RATIO = 0.66f
 private const val MOBILE_HERO_MIN_HEIGHT_DP = 360f
 private const val MOBILE_HERO_MAX_HEIGHT_DP = 760f
 
@@ -269,6 +271,24 @@ fun HomeHeroSection(
 
                 Box(
                     modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.secondary.copy(alpha = 0.14f),
+                                    MaterialTheme.colorScheme.secondary.copy(alpha = 0f),
+                                ),
+                                center = androidx.compose.ui.geometry.Offset(
+                                    heroWidthPx / 2f,
+                                    heroHeightPx * 1.05f,
+                                ),
+                                radius = heroWidthPx * 0.9f,
+                            ),
+                        ),
+                )
+
+                Box(
+                    modifier = Modifier
                         .fillMaxWidth()
                         .height(layout.bottomFadeHeight)
                         .align(Alignment.BottomCenter)
@@ -363,9 +383,15 @@ fun HomeHeroSection(
                                             }
                                         }
                                         .clip(CircleShape)
-                                        .background(MaterialTheme.colorScheme.onBackground)
+                                        .background(
+                                            lerp(
+                                                MaterialTheme.colorScheme.onBackground,
+                                                MaterialTheme.colorScheme.secondary,
+                                                activeFraction,
+                                            ),
+                                        )
                                         .graphicsLayer {
-                                            alpha = 0.35f + (0.57f * activeFraction)
+                                            alpha = 0.40f + (0.60f * activeFraction)
                                         }
                                         .width(8.dp + (24.dp * activeFraction))
                                         .height(8.dp),
@@ -458,7 +484,8 @@ private fun HeroContentBlock(
             )
         } else {
             Text(
-                text = item.name,
+                text = item.name.uppercase(),
+                letterSpacing = (-0.5).sp,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(enabled = onItemClick != null) {

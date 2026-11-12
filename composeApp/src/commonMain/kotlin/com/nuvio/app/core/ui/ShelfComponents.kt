@@ -286,6 +286,19 @@ private fun NuvioShelfSectionHeader(
             horizontalArrangement = Arrangement.spacedBy(tokens.spacing.controlGap),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            Box(
+                modifier = Modifier
+                    .size(width = 4.dp, height = 20.dp)
+                    .background(
+                        brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                            listOf(
+                                MaterialTheme.colorScheme.secondary,
+                                MaterialTheme.colorScheme.secondary.copy(alpha = 0.45f),
+                            ),
+                        ),
+                        shape = RoundedCornerShape(2.dp),
+                    ),
+            )
             Text(
                 text = title,
                 modifier = Modifier.weight(1f),
