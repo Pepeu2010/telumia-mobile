@@ -293,7 +293,7 @@ fun DetailHero(
 
 private fun detailHeroHeight(maxWidth: Dp, isTablet: Boolean): Dp =
     if (!isTablet) {
-        (maxWidth * 1.33f).coerceIn(420.dp, 760.dp)
+        (maxWidth * 1.14f).coerceIn(380.dp, 640.dp)
     } else {
         (maxWidth * 0.42f).coerceIn(300.dp, 420.dp)
     }

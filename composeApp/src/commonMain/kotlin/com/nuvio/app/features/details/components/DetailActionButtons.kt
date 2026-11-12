@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import com.nuvio.app.core.ui.AppIconResource
 import com.nuvio.app.core.ui.appIconPainter
 import com.nuvio.app.core.ui.backdropControlColor
+import com.nuvio.app.core.ui.nuvio
 import nuvio.composeapp.generated.resources.Res
 import nuvio.composeapp.generated.resources.action_play
 import nuvio.composeapp.generated.resources.details_actions_menu_label
@@ -110,8 +111,8 @@ fun DetailActionButtons(
                     .weight(1f)
                     .height(buttonHeight),
                 shape = playShape,
-                color = if (playEnabled) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.surfaceVariant,
-                contentColor = if (playEnabled) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                color = if (playEnabled) MaterialTheme.nuvio.colors.accent else MaterialTheme.colorScheme.surfaceVariant,
+                contentColor = if (playEnabled) MaterialTheme.nuvio.colors.onAccent else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
             ) {
                 Row(
                     modifier = Modifier
@@ -207,12 +208,12 @@ fun DetailActionButtons(
                     modifier = Modifier.size(iconButtonSize),
                     shape = CircleShape,
                     color = if (actionsExpanded) {
-                        MaterialTheme.colorScheme.onBackground
+                        MaterialTheme.nuvio.colors.accent
                     } else {
                         backdropControlColor(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.82f))
                     },
                     contentColor = if (actionsExpanded) {
-                        MaterialTheme.colorScheme.background
+                        MaterialTheme.nuvio.colors.onAccent
                     } else {
                         MaterialTheme.colorScheme.onSurface
                     },
@@ -315,12 +316,12 @@ private fun DetailIconAction(
         },
         shape = CircleShape,
         color = if (active) {
-            MaterialTheme.colorScheme.onBackground
+            MaterialTheme.nuvio.colors.accent
         } else {
             backdropControlColor(MaterialTheme.colorScheme.surfaceVariant)
         },
         contentColor = if (active) {
-            MaterialTheme.colorScheme.background
+            MaterialTheme.nuvio.colors.onAccent
         } else {
             MaterialTheme.colorScheme.onSurface
         },

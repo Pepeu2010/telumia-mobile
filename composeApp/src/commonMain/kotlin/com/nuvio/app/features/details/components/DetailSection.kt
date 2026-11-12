@@ -1,6 +1,16 @@
 package com.nuvio.app.features.details.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
+import com.nuvio.app.core.ui.nuvio
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,13 +49,29 @@ fun DetailSectionTitle(
     val titleModifier = if (fullWidth) modifier.fillMaxWidth() else modifier
     BoxWithConstraints(modifier = titleModifier) {
         val titleSize = if (maxWidth >= 720.dp) 22.sp else 20.sp
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleLarge.copy(
-                fontSize = titleSize,
-                fontWeight = FontWeight.SemiBold,
-            ),
-            color = MaterialTheme.colorScheme.onBackground,
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Box(
+                modifier = Modifier
+                    .size(width = 4.dp, height = 20.dp)
+                    .background(
+                        brush = Brush.verticalGradient(
+                            listOf(
+                                MaterialTheme.nuvio.colors.accent,
+                                MaterialTheme.nuvio.colors.accent.copy(alpha = 0.45f),
+                            ),
+                        ),
+                        shape = RoundedCornerShape(2.dp),
+                    ),
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontSize = titleSize,
+                    fontWeight = FontWeight.SemiBold,
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
     }
 }
