@@ -12,6 +12,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -91,15 +92,17 @@ fun TelumiaOpening(modifier: Modifier = Modifier) {
         }
     }
 
-    Box(
+    BoxWithConstraints(
         modifier = modifier
             .fillMaxSize()
             .background(OpeningNavy),
         contentAlignment = Alignment.Center,
     ) {
+        // Scale the lockup with the screen (small phones 0.85x, tablets up to 1.6x).
+        val scale = (minOf(maxWidth.value, maxHeight.value) / 360f).coerceIn(0.85f, 1.6f)
         Box(
             modifier = Modifier
-                .size(360.dp)
+                .size((360 * scale).dp)
                 .graphicsLayer { alpha = 0.5f * glow * reveal.value }
                 .background(
                     Brush.radialGradient(
@@ -109,10 +112,10 @@ fun TelumiaOpening(modifier: Modifier = Modifier) {
         )
         Box(
             modifier = Modifier
-                .size(width = 360.dp, height = 220.dp)
+                .size(width = (360 * scale).dp, height = (220 * scale).dp)
                 .graphicsLayer {
                     alpha = 0.4f * glow * reveal.value
-                    translationY = 150.dp.toPx()
+                    translationY = (150 * scale).dp.toPx()
                 }
                 .background(
                     Brush.radialGradient(
@@ -126,11 +129,11 @@ fun TelumiaOpening(modifier: Modifier = Modifier) {
                 painter = painterResource(Res.drawable.telumia_symbol),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(width = 120.dp, height = 95.dp)
+                    .size(width = (120 * scale).dp, height = (95 * scale).dp)
                     .graphicsLayer {
-                        val scale = 0.9f + 0.1f * reveal.value
-                        scaleX = scale
-                        scaleY = scale
+                        val grow = 0.9f + 0.1f * reveal.value
+                        scaleX = grow
+                        scaleY = grow
                     }
                     .drawWithContent {
                         val edge = size.width * reveal.value
@@ -152,7 +155,7 @@ fun TelumiaOpening(modifier: Modifier = Modifier) {
                 contentScale = ContentScale.Fit,
             )
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height((30 * scale).dp))
 
             Row(horizontalArrangement = Arrangement.Center) {
                 OpeningName.forEachIndexed { index, char ->
@@ -164,9 +167,9 @@ fun TelumiaOpening(modifier: Modifier = Modifier) {
                             translationY = (1f - progress) * 18.dp.toPx()
                         },
                         color = OpeningCream,
-                        fontSize = 34.sp,
+                        fontSize = (34 * scale).sp,
                         fontWeight = FontWeight.Black,
-                        letterSpacing = 7.sp,
+                        letterSpacing = (7 * scale).sp,
                     )
                 }
             }
@@ -176,13 +179,13 @@ fun TelumiaOpening(modifier: Modifier = Modifier) {
             Text(
                 text = stringResource(Res.string.compose_auth_tagline),
                 modifier = Modifier
-                    .width(300.dp)
+                    .width((300 * scale).dp)
                     .graphicsLayer {
                         alpha = tagline.value
                         translationY = (1f - tagline.value) * 8.dp.toPx()
                     },
                 color = OpeningCream.copy(alpha = 0.72f),
-                fontSize = 14.sp,
+                fontSize = (14 * scale).sp,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center,
             )

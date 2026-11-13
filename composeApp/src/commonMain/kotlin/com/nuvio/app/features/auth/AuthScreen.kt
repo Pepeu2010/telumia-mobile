@@ -59,6 +59,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithCache
@@ -444,13 +445,33 @@ private fun AuthMobileLayout(
             .align(Alignment.TopStart)
             .fillMaxWidth()
             .height(430.dp)
-            .clipToBounds(),
+            .clipToBounds()
+            .graphicsLayer { compositingStrategy = androidx.compose.ui.graphics.CompositingStrategy.Offscreen }
+            .drawWithContent {
+                drawContent()
+                // Fade the mosaic itself out, so there is no visible edge where it ends.
+                drawRect(
+                    brush = Brush.verticalGradient(
+                        colorStops = arrayOf(
+                            0f to Color.Black,
+                            0.6f to Color.Black,
+                            1f to Color.Transparent,
+                        ),
+                    ),
+                    blendMode = androidx.compose.ui.graphics.BlendMode.DstIn,
+                )
+            },
     ) {
-        AuthPosterMosaic(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .offset(x = (-44).dp, y = (-80).dp),
-        )
+        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+            // Enough columns to bleed past both edges on any screen width (the grid is rotated).
+            val columns = (((maxWidth.value + 160f) / 122f).toInt() + 1).coerceAtLeast(4)
+            AuthPosterMosaic(
+                columnCount = columns,
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .offset(x = (-44).dp, y = (-80).dp),
+            )
+        }
     }
     Box(
         modifier = Modifier
@@ -459,9 +480,9 @@ private fun AuthMobileLayout(
             .background(
                 Brush.verticalGradient(
                     colorStops = arrayOf(
-                        0f to Color(0x470B0F1A),
-                        0.55f to Color(0x990B0F1A),
-                        0.86f to Color(0xFF0B0F1A),
+                        0f to Color(0x330B0F1A),
+                        0.6f to Color(0x800B0F1A),
+                        1f to Color.Transparent,
                     ),
                 ),
             ),
@@ -1239,28 +1260,30 @@ private val AuthMosaicGradients = listOf(
     Color(0xFF3B3B3B) to Color(0xFF9A948A),
 )
 
+private val AuthMosaicColumns = listOf(
+    listOf(4 to 170, 1 to 150, 2 to 170),
+    listOf(0 to 150, 5 to 180, 3 to 150),
+    listOf(2 to 180, 4 to 150, 1 to 170),
+    listOf(3 to 150, 0 to 170, 5 to 160),
+)
+private val AuthMosaicOffsets = listOf(0, -46, 20, -20)
+
 /** Decorative poster mosaic (gradients, no artwork) from the Telumia Login design. */
 @Composable
-private fun AuthPosterMosaic(modifier: Modifier = Modifier) {
-    val columns = listOf(
-        listOf(4 to 170, 1 to 150, 2 to 170),
-        listOf(0 to 150, 5 to 180, 3 to 150),
-        listOf(2 to 180, 4 to 150, 1 to 170),
-        listOf(3 to 150, 0 to 170, 5 to 160),
-    )
-    val offsets = listOf(0, -46, 20, -20)
+private fun AuthPosterMosaic(columnCount: Int, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
-            .requiredWidth(480.dp)
+            .requiredWidth((columnCount * 122).dp)
             .graphicsLayer {
                 rotationZ = -9f
                 alpha = 0.85f
             },
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        columns.forEachIndexed { index, tiles ->
+        repeat(columnCount) { index ->
+            val tiles = AuthMosaicColumns[index % AuthMosaicColumns.size]
             Column(
-                modifier = Modifier.offset(y = offsets[index].dp),
+                modifier = Modifier.offset(y = AuthMosaicOffsets[index % AuthMosaicOffsets.size].dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 tiles.forEach { (gradient, height) ->

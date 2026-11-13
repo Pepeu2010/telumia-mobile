@@ -2,4 +2,9 @@
 <resources>
     <color name="app_icon_background">#0B0F1A</color>
     <color name="nuvio_background">#0B0F1A</color>
+    <color name="app_icon_bg_arctic_blue">#0E2A3A</color>
+    <color name="app_icon_bg_emerald">#0F2A22</color>
+    <color name="app_icon_bg_rose_gold">#EE6A55</color>
+    <color name="app_icon_bg_copper">#F2A93B</color>
+    <color name="app_icon_bg_graphite">#1A1A1A</color>
 </resources>

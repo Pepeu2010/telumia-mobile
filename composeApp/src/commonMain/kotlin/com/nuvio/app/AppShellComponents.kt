@@ -159,7 +159,10 @@ internal fun AppTabHost(
             }
 
             AppScreenTab.LiveTv -> {
-                com.nuvio.app.features.livetv.LiveTvScreen(modifier = Modifier.fillMaxSize())
+                com.nuvio.app.features.livetv.LiveTvScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    onChannelClick = actions.onPosterClick,
+                )
             }
 
             AppScreenTab.Library -> {

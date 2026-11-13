@@ -671,15 +671,9 @@
     <string name="settings_appearance_amoled_black">AMOLED ブラック</string>
     <string name="settings_appearance_amoled_description">OLEDスクリーン向けに純粋な黒背景を使用します。</string>
     <string name="settings_appearance_app_icon">アプリアイコン</string>
-    <string name="settings_appearance_app_icon_arctic_blue">アークティックブルー</string>
     <string name="settings_appearance_app_icon_android_confirmation_message">%1$sに変更するとNuvioが終了します。続けるにはOKをタップしてください。</string>
     <string name="settings_appearance_app_icon_android_confirmation_title">アプリアイコンを変更しますか？</string>
     <string name="settings_appearance_app_icon_change_failed">アイコンを変更できませんでした。もう一度お試しください。</string>
-    <string name="settings_appearance_app_icon_copper">カッパー</string>
-    <string name="settings_appearance_app_icon_emerald">エメラルド</string>
-    <string name="settings_appearance_app_icon_graphite">グラファイト</string>
-    <string name="settings_appearance_app_icon_original">オリジナル</string>
-    <string name="settings_appearance_app_icon_rose_gold">ローズゴールド</string>
     <string name="settings_appearance_app_icon_sheet_title">アプリアイコンを選択</string>
     <string name="settings_appearance_app_language">アプリの言語</string>
     <string name="settings_appearance_app_language_device">デバイスの言語</string>
@@ -1771,7 +1765,7 @@
     <string name="addon_already_installed">そのアドオンはすでにインストールされています。</string>
     <string name="addon_invalid_url">有効なアドオンURLを入力してください</string>
     <string name="addon_load_manifest_failed">マニフェストを読み込めませんでした</string>
-    <string name="app_brand_name">Nuvio</string>
+    <string name="app_brand_name">Telumia</string>
     <string name="auth_account_deletion_failed">アカウントの削除に失敗しました</string>
     <string name="auth_sign_in_failed">サインインに失敗しました</string>
     <string name="auth_sign_out_failed">サインアウトに失敗しました</string>
