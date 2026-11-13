@@ -72,7 +72,11 @@ enum class AppLanguage(
     }
 
     companion object {
+        /** Telumia is Brazil-focused: Brazilian Portuguese unless the user picks another language. */
+        val Default: AppLanguage = PORTUGUESE_BRAZIL
+
         fun fromCode(code: String?): AppLanguage =
-            entries.firstOrNull { it.code.equals(code, ignoreCase = true) } ?: DEVICE
+            if (code == null) Default
+            else entries.firstOrNull { it.code.equals(code, ignoreCase = true) } ?: DEVICE
     }
 }
