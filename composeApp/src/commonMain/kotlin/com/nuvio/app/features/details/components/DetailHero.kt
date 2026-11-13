@@ -123,8 +123,42 @@ fun DetailHero(
                         .fillMaxSize()
                         .then(if (cinematicBackground) Modifier.featherArtwork() else Modifier),
                 ) {
+                    val isChannel = meta.type.equals("tv", ignoreCase = true)
                     val imageUrl = meta.background ?: meta.poster
-                    if (imageUrl != null) {
+                    if (isChannel && imageUrl != null) {
+                        // Channels only have a logo-style image: show it whole, centered, on a soft panel.
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.TopCenter)
+                                .fillMaxWidth()
+                                .height(heroHeight)
+                                .background(
+                                    Brush.verticalGradient(
+                                        listOf(
+                                            MaterialTheme.colorScheme.surface,
+                                            MaterialTheme.colorScheme.background,
+                                        ),
+                                    ),
+                                )
+                                .graphicsLayer { translationY = scrollOffset() * 0.5f },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            AsyncImage(
+                                model = imageUrl,
+                                contentDescription = meta.name,
+                                modifier = Modifier
+                                    .fillMaxWidth(0.6f)
+                                    .height(heroHeight * 0.4f),
+                                contentScale = ContentScale.Fit,
+                                onSuccess = { state ->
+                                    onBackdropLoaded(
+                                        state.painter,
+                                        loadedBackdropImageBitmap(state.result),
+                                    )
+                                },
+                            )
+                        }
+                    } else if (imageUrl != null) {
                         val backdropFocus = rememberBackdropFocusState(imageUrl)
                         AsyncImage(
                             model = imageUrl,
