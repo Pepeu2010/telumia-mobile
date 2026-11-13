@@ -76,8 +76,8 @@ import org.jetbrains.compose.resources.stringResource
 import com.nuvio.app.core.i18n.localizedEpisodeTitle
 
 private val ContinueWatchingStatusBadgeShape = RoundedCornerShape(4.dp)
-private val ContinueWatchingNewEpisodeBadgeColor = Color(0xFF1D4ED8)
-private val ContinueWatchingNewSeasonBadgeColor = Color(0xFFB45309)
+private val ContinueWatchingNewEpisodeBadgeColor = Color(0xFFEE6A55)
+private val ContinueWatchingNewSeasonBadgeColor = Color(0xFFF2A93B)
 private const val ContinueWatchingLandscapeCardScale = 1.2f
 internal val HomeContinueWatchingSectionBottomPadding = 12.dp
 
@@ -1215,7 +1215,7 @@ private fun UpNextBadge(
                 fontSize = textSize,
                 fontWeight = FontWeight.Bold,
             ),
-            color = Color.White,
+            color = if (item.isNewSeasonRelease || item.isReleaseAlert) Color(0xFF241502) else Color.White,
             maxLines = 1,
         )
     }

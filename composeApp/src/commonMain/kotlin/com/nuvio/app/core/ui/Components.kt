@@ -37,6 +37,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.unit.sp
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
@@ -193,13 +194,38 @@ fun NuvioScreenHeader(
                     transitionSpec = { fadeIn() togetherWith fadeOut() },
                     label = "screen_header_title",
                 ) { currentTitle ->
-                    Text(
-                        text = currentTitle,
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
-                        style = MaterialTheme.typography.displayLarge,
-                        color = tokens.colors.textPrimary,
-                        textAlign = TextAlign.Start,
-                    )
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(width = 4.dp, height = 24.dp)
+                                .background(
+                                    brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                                        listOf(
+                                            tokens.colors.accent,
+                                            tokens.colors.accent.copy(alpha = 0.45f),
+                                        ),
+                                    ),
+                                    shape = androidx.compose.foundation.shape.RoundedCornerShape(2.dp),
+                                ),
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(
+                            text = currentTitle,
+                            modifier = Modifier.weight(1f),
+                            style = MaterialTheme.typography.displayLarge.copy(
+                                fontSize = 28.sp,
+                                lineHeight = 34.sp,
+                                fontWeight = FontWeight.Bold,
+                            ),
+                            color = tokens.colors.textPrimary,
+                            textAlign = TextAlign.Start,
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                        )
+                    }
                 }
             }
             Row(
@@ -216,13 +242,26 @@ fun NuvioSectionLabel(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-    Text(
-        text = text,
+    Row(
         modifier = modifier,
-        style = MaterialTheme.typography.labelMedium,
-        color = MaterialTheme.nuvio.colors.textMuted,
-        fontWeight = FontWeight.Bold,
-    )
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(width = 3.dp, height = 14.dp)
+                .background(
+                    color = MaterialTheme.nuvio.colors.accent,
+                    shape = androidx.compose.foundation.shape.RoundedCornerShape(2.dp),
+                ),
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = text,
+            style = MaterialTheme.typography.labelMedium.copy(letterSpacing = 0.6.sp),
+            color = MaterialTheme.nuvio.colors.textMuted,
+            fontWeight = FontWeight.Bold,
+        )
+    }
 }
 
 @Composable

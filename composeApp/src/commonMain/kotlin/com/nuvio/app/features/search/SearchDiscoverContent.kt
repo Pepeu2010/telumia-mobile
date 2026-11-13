@@ -121,11 +121,9 @@ internal fun LazyListScope.discoverContent(
 
 @Composable
 private fun DiscoverSectionHeader(modifier: Modifier = Modifier) {
-    Text(
-        text = stringResource(Res.string.compose_search_discover_title),
+    com.nuvio.app.features.details.components.DetailSectionTitle(
+        title = stringResource(Res.string.compose_search_discover_title),
         modifier = modifier,
-        style = MaterialTheme.typography.displaySmall,
-        color = MaterialTheme.colorScheme.onBackground,
     )
 }
 

@@ -77,6 +77,7 @@ import com.nuvio.app.core.ui.themePalette
 import com.nuvio.app.core.ui.accentBrush
 import com.nuvio.app.core.ui.appIconPainter
 import com.nuvio.app.core.ui.gradientMask
+import com.nuvio.app.core.ui.nuvio
 import com.nuvio.app.core.ui.nuvioTypeScale
 import com.nuvio.app.features.streams.StreamBadge
 import nuvio.composeapp.generated.resources.*
@@ -834,10 +835,11 @@ private fun PlayerProgressTrack(
         activeTrackColor = Color.Transparent,
         disabledActiveTrackColor = Color.Transparent,
     )
+    val timelineAccent = MaterialTheme.nuvio.colors.accent
     val activeTrackColors = SliderDefaults.colors(
-        activeTrackColor = Color.White,
+        activeTrackColor = timelineAccent,
         inactiveTrackColor = Color.Transparent,
-        disabledActiveTrackColor = Color.White,
+        disabledActiveTrackColor = timelineAccent,
         disabledInactiveTrackColor = Color.Transparent,
     )
 
@@ -881,12 +883,13 @@ internal fun LockedPlayerOverlay(
     modifier: Modifier = Modifier,
 ) {
     val durationMs = playbackSnapshot.durationMs.coerceAtLeast(1L)
+    val timelineAccent = MaterialTheme.nuvio.colors.accent
     val sliderColors = SliderDefaults.colors(
-        thumbColor = Color.White,
-        activeTrackColor = Color.White,
+        thumbColor = timelineAccent,
+        activeTrackColor = timelineAccent,
         inactiveTrackColor = Color.White.copy(alpha = 0.28f),
-        disabledThumbColor = Color.White,
-        disabledActiveTrackColor = Color.White,
+        disabledThumbColor = timelineAccent,
+        disabledActiveTrackColor = timelineAccent,
         disabledInactiveTrackColor = Color.White.copy(alpha = 0.28f),
     )
 
