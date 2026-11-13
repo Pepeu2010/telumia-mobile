@@ -146,6 +146,15 @@ internal fun AppGate(
     }
 
     var gateScreen by rememberSaveable { mutableStateOf(AppGateScreen.Loading.name) }
+    // Keep the Telumia opening on screen long enough to play its sequence on cold starts.
+    var openingFinished by rememberSaveable { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        if (!openingFinished) {
+            kotlinx.coroutines.delay(2600L)
+            openingFinished = true
+        }
+    }
+    val shownGateScreen = if (openingFinished) gateScreen else AppGateScreen.Loading.name
     var editingProfile by remember { mutableStateOf<NuvioProfile?>(null) }
     var autoSkipProfileSelection by rememberSaveable { mutableStateOf(false) }
     var profileSelectionLoading by rememberSaveable { mutableStateOf(false) }
@@ -418,7 +427,7 @@ internal fun AppGate(
 
     Box(modifier = Modifier.fillMaxSize()) {
         AnimatedContent(
-            targetState = gateScreen,
+            targetState = shownGateScreen,
             label = "app_gate",
             transitionSpec = {
                 (fadeIn(tween(400)) + scaleIn(tween(400), initialScale = 0.94f))
@@ -427,14 +436,7 @@ internal fun AppGate(
         ) { currentGate ->
             when (currentGate) {
                 AppGateScreen.Loading.name -> {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.nuvio.colors.background),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        NuvioLoadingIndicator()
-                    }
+                    com.nuvio.app.core.ui.TelumiaOpening()
                 }
                 AppGateScreen.Auth.name -> {
                     AuthScreen(

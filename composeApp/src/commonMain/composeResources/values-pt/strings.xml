@@ -307,7 +307,7 @@
     <string name="collections_pinned">Fixadas</string>
     <string name="collections_tab_all">Tudo</string>
     <string name="collections_your_collections">As tuas coleções</string>
-    <string name="compose_about_made_with">Feito com ❤️ pela Tapframe e amigos</string>
+    <string name="compose_about_made_with">Feito com ❤️ por Pedro Miguel</string>
     <string name="compose_about_version_format">Versão %1$s (%2$s)</string>
     <string name="compose_action_off">Desativado</string>
     <string name="compose_action_on">Ativado</string>
@@ -1909,4 +1909,13 @@
     <string name="settings_mdblist_library_lists_empty">Ainda não foram encontradas listas na tua conta MDBList. Sincroniza para as carregar.</string>
     <string name="telumia_auth_synced">SINCRONIZADO</string>
     <string name="telumia_auth_synced_title">Continue de onde parou</string>
+    <string name="compose_nav_live_tv">Live TV</string>
+    <string name="live_tv_title">Live TV</string>
+    <string name="live_tv_category_all">Todos</string>
+    <string name="live_tv_category_news">Notícias</string>
+    <string name="live_tv_category_sports">Esportes</string>
+    <string name="live_tv_category_movies">Filmes</string>
+    <string name="live_tv_live_badge">AO VIVO</string>
+    <string name="live_tv_next_format">A seguir: %1$s</string>
+    <string name="live_tv_preview_notice">Prévia da interface com canais de exemplo. Conecte uma fonte de canais para ver a programação real.</string>
 </resources>

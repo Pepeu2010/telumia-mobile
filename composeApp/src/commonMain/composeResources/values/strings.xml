@@ -336,7 +336,7 @@
     <string name="collections_pinned">Pinned</string>
     <string name="collections_tab_all">All</string>
     <string name="collections_your_collections">Your Collections</string>
-    <string name="compose_about_made_with">Made with ❤️ by Tapframe and friends</string>
+    <string name="compose_about_made_with">Made with ❤️ by Pedro Miguel</string>
     <string name="compose_about_version_format">Version %1$s (%2$s)</string>
     <string name="compose_action_off">Off</string>
     <string name="compose_action_on">On</string>
@@ -2561,4 +2561,13 @@
     <string name="subtitle_reset_appearance">Reset appearance</string>
     <string name="telumia_auth_synced">SYNCED</string>
     <string name="telumia_auth_synced_title">Pick up where you left off</string>
+    <string name="compose_nav_live_tv">Live TV</string>
+    <string name="live_tv_title">Live TV</string>
+    <string name="live_tv_category_all">All</string>
+    <string name="live_tv_category_news">News</string>
+    <string name="live_tv_category_sports">Sports</string>
+    <string name="live_tv_category_movies">Movies</string>
+    <string name="live_tv_live_badge">LIVE</string>
+    <string name="live_tv_next_format">Next: %1$s</string>
+    <string name="live_tv_preview_notice">Interface preview with sample channels. Connect a channel source to see the real guide.</string>
 </resources>
