@@ -6,7 +6,7 @@
 
 ## Estado
 
-Pré-lançamento **0.6.12**: [baixe os APKs na página de releases](https://github.com/Pepeu2010/telumia-mobile/releases/latest). Para a maioria dos celulares, use `arm64-v8a`. A base é o [NuvioMedia/NuvioMobile](https://github.com/NuvioMedia/NuvioMobile) (`cmp-rewrite`, commit `e9f136b`), com identidade própria: nome **Telumia**, `applicationId` `io.github.pepeu2010.telumia.mobile`, abertura animada, português do Brasil por padrão e o visual do design system Telumia Mobile (Início, Detalhes, Busca, Biblioteca, Downloads, Configurações, Login e seleção de perfil).
+Pré-lançamento **0.6.12**: [baixe os APKs na página de releases](https://github.com/Pepeu2010/telumia-mobile/releases). Para a maioria dos celulares, use `arm64-v8a`. A base é o [NuvioMedia/NuvioMobile](https://github.com/NuvioMedia/NuvioMobile) (`cmp-rewrite`, commit `e9f136b`), com identidade própria: nome **Telumia**, `applicationId` `io.github.pepeu2010.telumia.mobile`, abertura animada, português do Brasil por padrão e o visual do design system Telumia Mobile (Início, Detalhes, Busca, Biblioteca, Downloads, Configurações, Login e seleção de perfil).
 
 Limitações: os APKs são assinados com a chave de debug do Android (não servem para a Play Store e só atualizam com a mesma chave), não são minificados e foram testados apenas em emulador. A aba Live TV é só interface, com canais de exemplo. O player ainda não foi validado com uma fonte de vídeo.
 
