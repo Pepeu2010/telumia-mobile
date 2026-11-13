@@ -85,8 +85,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nuvio.composeapp.generated.resources.telumia_auth_synced_title
-import nuvio.composeapp.generated.resources.telumia_auth_synced
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -474,7 +472,7 @@ private fun AuthMobileLayout(
             .verticalScroll(rememberScrollState())
             .padding(
                 start = 30.dp,
-                top = statusBarTop + 232.dp,
+                top = statusBarTop + 176.dp,
                 end = 30.dp,
                 bottom = 40.dp,
             ),
@@ -484,9 +482,9 @@ private fun AuthMobileLayout(
             modifier = Modifier
                 .widthIn(max = 342.dp)
                 .fillMaxWidth(),
-            horizontalAlignment = Alignment.Start,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            AuthBrandLockup(logoHeight = 34.dp, alignStart = true, showTagline = false)
+            AuthBrandLockup(logoHeight = 34.dp, alignStart = false, showTagline = false)
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -531,11 +529,6 @@ private fun AuthMobileLayout(
             )
         }
     }
-    AuthSyncCard(
-        modifier = Modifier
-            .align(Alignment.TopStart)
-            .padding(start = 30.dp, end = 30.dp, top = statusBarTop + 120.dp),
-    )
     }
 }
 
@@ -715,8 +708,10 @@ private fun AuthHeading(
             Text(
                 text = if (signUp) stringResource(Res.string.compose_auth_create_account)
                 else stringResource(Res.string.compose_auth_welcome_back),
+                modifier = Modifier.fillMaxWidth(),
                 style = headingStyle,
                 color = AuthTextPrimary,
+                textAlign = TextAlign.Center,
             )
         }
         AnimatedContent(
@@ -727,8 +722,10 @@ private fun AuthHeading(
             Text(
                 text = if (signUp) stringResource(Res.string.compose_auth_sign_up_subtitle)
                 else stringResource(Res.string.compose_auth_sign_in_subtitle),
+                modifier = Modifier.fillMaxWidth(),
                 style = subtitleStyle,
                 color = AuthTextSecondary,
+                textAlign = TextAlign.Center,
             )
         }
     }
@@ -1276,63 +1273,6 @@ private fun AuthPosterMosaic(modifier: Modifier = Modifier) {
                             .background(Brush.linearGradient(listOf(from, to))),
                     )
                 }
-            }
-        }
-    }
-}
-
-@Composable
-private fun AuthSyncCard(modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(18.dp)
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .background(Color(0xE0161C2D))
-            .border(1.dp, Color(0x1FF6EBD6), shape)
-            .padding(10.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Box(
-            modifier = Modifier
-                .size(56.dp)
-                .clip(RoundedCornerShape(12.dp))
-                .background(Brush.linearGradient(listOf(Color(0xFF2B3A2A), Color(0xFF8AA35A)))),
-        )
-        Spacer(modifier = Modifier.width(12.dp))
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = stringResource(Res.string.telumia_auth_synced),
-                color = Color(0xFFFFC565),
-                fontSize = 11.sp,
-                lineHeight = 14.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 0.5.sp,
-            )
-            Spacer(modifier = Modifier.height(2.dp))
-            Text(
-                text = stringResource(Res.string.telumia_auth_synced_title),
-                color = AuthTextPrimary,
-                fontSize = 13.sp,
-                lineHeight = 18.sp,
-                fontWeight = FontWeight.Medium,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Spacer(modifier = Modifier.height(6.dp))
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(4.dp)
-                    .clip(RoundedCornerShape(2.dp))
-                    .background(Color(0x1FF6EBD6)),
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(0.7f)
-                        .fillMaxHeight()
-                        .background(Color(0xFFF2A93B)),
-                )
             }
         }
     }

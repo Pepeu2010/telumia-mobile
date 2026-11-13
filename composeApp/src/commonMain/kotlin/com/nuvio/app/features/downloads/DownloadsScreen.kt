@@ -103,6 +103,7 @@ fun DownloadsScreen(
                         Icon(
                             imageVector = Icons.Rounded.Folder,
                             contentDescription = stringResource(Res.string.downloads_open_directory),
+                            tint = MaterialTheme.colorScheme.onBackground,
                         )
                     }
                 },

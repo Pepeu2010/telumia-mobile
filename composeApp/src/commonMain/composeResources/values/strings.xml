@@ -2559,8 +2559,6 @@
     <string name="subtitle_shadow_opacity">Shadow opacity</string>
     <string name="subtitle_shadow_size">Shadow size</string>
     <string name="subtitle_reset_appearance">Reset appearance</string>
-    <string name="telumia_auth_synced">SYNCED</string>
-    <string name="telumia_auth_synced_title">Pick up where you left off</string>
     <string name="compose_nav_live_tv">Live TV</string>
     <string name="live_tv_title">Live TV</string>
     <string name="live_tv_category_all">All</string>

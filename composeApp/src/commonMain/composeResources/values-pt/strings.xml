@@ -1907,8 +1907,6 @@
     <string name="settings_mdblist_library_lists_description">Escolhe que listas do MDBList aparecem na Biblioteca e em Gerir Listas. A Watchlist aparece sempre.</string>
     <string name="settings_mdblist_library_lists_summary">%1$d de %2$d visíveis</string>
     <string name="settings_mdblist_library_lists_empty">Ainda não foram encontradas listas na tua conta MDBList. Sincroniza para as carregar.</string>
-    <string name="telumia_auth_synced">SINCRONIZADO</string>
-    <string name="telumia_auth_synced_title">Continue de onde parou</string>
     <string name="compose_nav_live_tv">Live TV</string>
     <string name="live_tv_title">Live TV</string>
     <string name="live_tv_category_all">Todos</string>
