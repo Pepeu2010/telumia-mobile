@@ -767,6 +767,11 @@ internal fun MainAppContent(
                         AppDeepLinkRepository.markConsumed(deepLink)
                     }
 
+                    AppDeepLink.LiveTv -> {
+                        activateTab(AppScreenTab.LiveTv)
+                        AppDeepLinkRepository.markConsumed(deepLink)
+                    }
+
                     is AppDeepLink.Party -> {
                         appGateController?.appReady?.first { it }
                         navController.navigate(PartyRoute(code = deepLink.code, title = watchPartyTitle)) {

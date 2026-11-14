@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="live_tv"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_live_tv"
+        android:shortcutShortLabel="@string/shortcut_live_tv_short"
+        android:shortcutLongLabel="@string/shortcut_live_tv_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="nuvio://livetv"
+            android:targetPackage="io.github.pepeu2010.telumia.mobile.debug"
+            android:targetClass="com.nuvio.app.LinkActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="downloads"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_downloads"
+        android:shortcutShortLabel="@string/shortcut_downloads_short"
+        android:shortcutLongLabel="@string/shortcut_downloads_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="nuvio://downloads"
+            android:targetPackage="io.github.pepeu2010.telumia.mobile.debug"
+            android:targetClass="com.nuvio.app.LinkActivity" />
+    </shortcut>
+</shortcuts>

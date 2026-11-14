@@ -68,6 +68,7 @@ import com.nuvio.app.core.ui.NuvioAnimatedWatchedBadge
 import com.nuvio.app.core.ui.NuvioCardDepthSurface
 import com.nuvio.app.core.ui.NuvioProgressBar
 import com.nuvio.app.core.ui.backdropControlColor
+import com.nuvio.app.core.ui.nuvio
 import com.nuvio.app.core.ui.nuvioCardDepth
 import com.nuvio.app.core.ui.nuvioHorizontalScrollBleed
 import com.nuvio.app.core.ui.posterCardClickable
@@ -522,7 +523,7 @@ private fun SeasonTextChipScrollRow(
                     .clip(RoundedCornerShape(sizing.seasonChipRadius))
                     .background(
                         if (isSelected) {
-                            backdropControlColor(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
+                            MaterialTheme.nuvio.colors.accent.copy(alpha = 0.22f)
                         } else {
                             Color.Transparent
                         },
@@ -544,7 +545,7 @@ private fun SeasonTextChipScrollRow(
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold,
                     ),
                     color = if (isSelected) {
-                        MaterialTheme.colorScheme.onBackground
+                        MaterialTheme.nuvio.colors.accent
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     },
@@ -644,7 +645,7 @@ private fun SeasonPosterButton(
                 .border(
                     width = if (isSelected) 2.dp else 1.dp,
                     color = if (isSelected) {
-                        MaterialTheme.colorScheme.primary
+                        MaterialTheme.nuvio.colors.accent
                     } else {
                         Color.White.copy(alpha = 0.1f)
                     },
@@ -963,7 +964,7 @@ private fun EpisodeHorizontalCard(
                     ),
                 height = progressBarHeight,
                 trackColor = Color.White.copy(alpha = 0.22f),
-                fillColor = MaterialTheme.colorScheme.primary,
+                fillColor = MaterialTheme.nuvio.colors.accent,
             )
         }
     }
@@ -1352,7 +1353,7 @@ private fun EpisodeListCard(
                         .padding(start = 12.dp, bottom = 10.dp),
                     height = 5.dp,
                     trackColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.14f),
-                    fillColor = MaterialTheme.colorScheme.primary,
+                    fillColor = MaterialTheme.nuvio.colors.accent,
                 )
             }
     }

@@ -1263,4 +1263,19 @@
     <string name="stream_info_subtitle_source_addon">Addon</string>
     <string name="stream_info_subtitle_source_embedded">Eingebettet</string>
     <string name="stream_info_player_engine">Player Engine</string>
+    <string name="live_tv_title">Live-TV</string>
+    <string name="live_tv_all_channels">Alle Sender</string>
+    <string name="live_tv_loading">Sender werden geladen…</string>
+    <string name="live_tv_empty_title">Noch keine Sender</string>
+    <string name="live_tv_empty_message">Installiere ein Addon mit Live-TV-Sendern (ein Katalog vom Typ tv) unter Einstellungen > Inhalte &amp; Entdecken, dann erscheinen die Sender hier.</string>
+    <string name="live_tv_error">Einige Sender konnten nicht geladen werden. Prüfe deine Verbindung und das Addon.</string>
+    <string name="live_tv_no_results">Keine Sender gefunden.</string>
+    <string name="live_tv_search_placeholder">Sender suchen…</string>
+    <string name="live_tv_favorites">Favoriten</string>
+    <string name="live_tv_recent">Zuletzt gesehen</string>
+    <string name="live_tv_continue">Weiter: %1$s</string>
+    <string name="live_tv_favorite_add">Zu Favoriten hinzufügen</string>
+    <string name="live_tv_favorite_remove">Aus Favoriten entfernen</string>
+    <string name="live_tv_no_favorites">Tippe auf den Stern eines Senders, um ihn hier zu speichern.</string>
+    <string name="compose_nav_live_tv">Live-TV</string>
 </resources>

@@ -2550,4 +2550,19 @@
     <string name="subtitle_shadow_opacity">Dekking van de schaduw</string>
     <string name="subtitle_shadow_size">Grootte van de schaduw</string>
     <string name="subtitle_reset_appearance">Uiterlijk herstellen</string>
+    <string name="live_tv_title">Live TV</string>
+    <string name="live_tv_all_channels">Alle zenders</string>
+    <string name="live_tv_loading">Zenders laden…</string>
+    <string name="live_tv_empty_title">Nog geen zenders</string>
+    <string name="live_tv_empty_message">Installeer een addon met live-tv-zenders (een catalogus van het type tv) via Instellingen > Content en ontdekken en de zenders verschijnen hier.</string>
+    <string name="live_tv_error">Sommige zenders konden niet worden geladen. Controleer je verbinding en de addon.</string>
+    <string name="live_tv_no_results">Geen zenders gevonden.</string>
+    <string name="live_tv_search_placeholder">Zenders zoeken…</string>
+    <string name="live_tv_favorites">Favorieten</string>
+    <string name="live_tv_recent">Recent bekeken</string>
+    <string name="live_tv_continue">Doorgaan: %1$s</string>
+    <string name="live_tv_favorite_add">Toevoegen aan favorieten</string>
+    <string name="live_tv_favorite_remove">Verwijderen uit favorieten</string>
+    <string name="live_tv_no_favorites">Tik op de ster bij een zender om hem hier op te slaan.</string>
+    <string name="compose_nav_live_tv">Live TV</string>
 </resources>

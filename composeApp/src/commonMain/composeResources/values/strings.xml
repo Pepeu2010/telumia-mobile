@@ -2568,4 +2568,10 @@
     <string name="live_tv_error">Some channels could not be loaded. Check your connection and the addon.</string>
     <string name="live_tv_no_results">No channels found.</string>
     <string name="live_tv_search_placeholder">Search channels…</string>
+    <string name="live_tv_favorites">Favorites</string>
+    <string name="live_tv_recent">Recently watched</string>
+    <string name="live_tv_continue">Continue: %1$s</string>
+    <string name="live_tv_favorite_add">Add to favorites</string>
+    <string name="live_tv_favorite_remove">Remove from favorites</string>
+    <string name="live_tv_no_favorites">Tap the star on a channel to save it here.</string>
 </resources>

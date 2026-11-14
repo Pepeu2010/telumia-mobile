@@ -48,7 +48,8 @@ fun buildHomeCatalogDefinitions(addons: List<ManagedAddon>): List<HomeCatalogDef
         addon to manifest
     }.flatMap { (addon, manifest) ->
         manifest.catalogs
-            .filter { catalog -> catalog.extra.none { it.isRequired } }
+            // Live TV channels have their own tab; their logos do not fit poster rows on Home.
+            .filter { catalog -> !catalog.type.equals("tv", ignoreCase = true) && catalog.extra.none { it.isRequired } }
             .map { catalog ->
                 HomeCatalogDefinition(
                     key = "${manifest.id}:${catalog.type}:${catalog.id}",

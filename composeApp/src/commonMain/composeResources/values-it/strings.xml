@@ -2520,4 +2520,19 @@
         <item quantity="one">%d titolo</item>
         <item quantity="other">%d titoli</item>
     </plurals>
+    <string name="live_tv_title">Live TV</string>
+    <string name="live_tv_all_channels">Tutti i canali</string>
+    <string name="live_tv_loading">Caricamento dei canali…</string>
+    <string name="live_tv_empty_title">Ancora nessun canale</string>
+    <string name="live_tv_empty_message">Installa un addon con canali TV in diretta (un catalogo di tipo tv) in Impostazioni > Contenuti e scoperta e i canali compariranno qui.</string>
+    <string name="live_tv_error">Non è stato possibile caricare alcuni canali. Controlla la connessione e l’addon.</string>
+    <string name="live_tv_no_results">Nessun canale trovato.</string>
+    <string name="live_tv_search_placeholder">Cerca canali…</string>
+    <string name="live_tv_favorites">Preferiti</string>
+    <string name="live_tv_recent">Guardati di recente</string>
+    <string name="live_tv_continue">Continua: %1$s</string>
+    <string name="live_tv_favorite_add">Aggiungi ai preferiti</string>
+    <string name="live_tv_favorite_remove">Rimuovi dai preferiti</string>
+    <string name="live_tv_no_favorites">Tocca la stella di un canale per salvarlo qui.</string>
+    <string name="compose_nav_live_tv">Live TV</string>
 </resources>

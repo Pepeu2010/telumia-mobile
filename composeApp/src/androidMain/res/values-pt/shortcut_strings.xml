@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shortcut_live_tv_short">Live TV</string>
+    <string name="shortcut_live_tv_long">Abrir Live TV</string>
+    <string name="shortcut_downloads_short">Downloads</string>
+    <string name="shortcut_downloads_long">Abrir downloads</string>
+</resources>

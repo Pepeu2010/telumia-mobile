@@ -23,6 +23,8 @@ internal sealed interface AppDeepLink {
 
     data object Downloads : AppDeepLink
 
+    data object LiveTv : AppDeepLink
+
     data class Party(
         val code: String,
     ) : AppDeepLink
@@ -101,6 +103,8 @@ internal fun parseAppDeepLink(url: String): AppDeepLink? {
         "imdb", "tmdb" -> parseProviderMetaDeepLink(host, pathSegments, parsedUrl)
 
         "downloads" -> AppDeepLink.Downloads
+
+        "livetv" -> AppDeepLink.LiveTv
 
         "party" -> partyDeepLink(pathSegments.firstOrNull() ?: firstParameter(parsedUrl, "code"))
 

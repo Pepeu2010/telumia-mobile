@@ -2550,4 +2550,19 @@
     <string name="subtitle_shadow_opacity">Opacité de l’ombre</string>
     <string name="subtitle_shadow_size">Taille de l’ombre</string>
     <string name="subtitle_reset_appearance">Réinitialiser l’apparence</string>
+    <string name="live_tv_title">Live TV</string>
+    <string name="live_tv_all_channels">Toutes les chaînes</string>
+    <string name="live_tv_loading">Chargement des chaînes…</string>
+    <string name="live_tv_empty_title">Aucune chaîne pour l’instant</string>
+    <string name="live_tv_empty_message">Installez un addon avec des chaînes de TV en direct (un catalogue de type tv) dans Paramètres > Contenu et découverte et les chaînes apparaîtront ici.</string>
+    <string name="live_tv_error">Certaines chaînes n’ont pas pu être chargées. Vérifiez votre connexion et l’addon.</string>
+    <string name="live_tv_no_results">Aucune chaîne trouvée.</string>
+    <string name="live_tv_search_placeholder">Rechercher des chaînes…</string>
+    <string name="live_tv_favorites">Favoris</string>
+    <string name="live_tv_recent">Regardées récemment</string>
+    <string name="live_tv_continue">Reprendre : %1$s</string>
+    <string name="live_tv_favorite_add">Ajouter aux favoris</string>
+    <string name="live_tv_favorite_remove">Retirer des favoris</string>
+    <string name="live_tv_no_favorites">Touchez l’étoile d’une chaîne pour l’enregistrer ici.</string>
+    <string name="compose_nav_live_tv">Live TV</string>
 </resources>

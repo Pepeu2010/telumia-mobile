@@ -17,12 +17,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items as rowItems
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.rounded.StarOutline
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,6 +43,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,6 +59,12 @@ import com.nuvio.app.features.catalog.fetchCatalogPage
 import com.nuvio.app.features.home.MetaPreview
 import nuvio.composeapp.generated.resources.Res
 import nuvio.composeapp.generated.resources.live_tv_all_channels
+import nuvio.composeapp.generated.resources.live_tv_continue
+import nuvio.composeapp.generated.resources.live_tv_favorite_add
+import nuvio.composeapp.generated.resources.live_tv_favorite_remove
+import nuvio.composeapp.generated.resources.live_tv_favorites
+import nuvio.composeapp.generated.resources.live_tv_no_favorites
+import nuvio.composeapp.generated.resources.live_tv_recent
 import nuvio.composeapp.generated.resources.live_tv_empty_message
 import nuvio.composeapp.generated.resources.live_tv_empty_title
 import nuvio.composeapp.generated.resources.live_tv_error
@@ -62,6 +75,7 @@ import nuvio.composeapp.generated.resources.live_tv_title
 import org.jetbrains.compose.resources.stringResource
 
 private const val LiveTvType = "tv"
+private const val FavoritesFilter = "__favorites__"
 
 private data class LiveTvCatalogSource(
     val manifestUrl: String,
@@ -138,6 +152,14 @@ fun LiveTvScreen(
         }
     }
 
+    LaunchedEffect(Unit) { LiveTvRepository.ensureLoaded() }
+    val favoriteIds by LiveTvRepository.favorites.collectAsState()
+    val recentIds by LiveTvRepository.recents.collectAsState()
+    val openChannel: (MetaPreview) -> Unit = { meta ->
+        LiveTvRepository.recordWatched(meta.id)
+        onChannelClick?.invoke(meta)
+    }
+
     var query by rememberSaveable { mutableStateOf("") }
     var selectedSource by rememberSaveable { mutableStateOf<String?>(null) }
     val bottomOverlayPadding = LocalNuvioBottomNavigationOverlayPadding.current
@@ -174,9 +196,15 @@ fun LiveTvScreen(
             else -> {
                 val sourceTitles = channels.map { it.source }.distinct()
                 val filtered = channels.filter { channel ->
-                    (selectedSource == null || channel.source == selectedSource) &&
-                        (query.isBlank() || channel.meta.name.contains(query.trim(), ignoreCase = true))
+                    val sourceOk = when (selectedSource) {
+                        null -> true
+                        FavoritesFilter -> channel.meta.id in favoriteIds
+                        else -> channel.source == selectedSource
+                    }
+                    sourceOk && (query.isBlank() || channel.meta.name.contains(query.trim(), ignoreCase = true))
                 }
+                val recentChannels = recentIds.mapNotNull { id -> channels.firstOrNull { it.meta.id == id } }
+                val showRecents = query.isBlank() && selectedSource == null && recentChannels.isNotEmpty()
                 BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                     // Adapt the grid to the phone: ~160dp per channel card, between 2 and 6 columns.
                     val columns = (maxWidth.value / 160f).toInt().coerceIn(2, 6)
@@ -195,10 +223,21 @@ fun LiveTvScreen(
                                     placeholder = stringResource(Res.string.live_tv_search_placeholder),
                                     shape = RoundedCornerShape(24.dp),
                                 )
-                                if (sourceTitles.size > 1) {
+                                if (showRecents) {
+                                    ContinueButton(
+                                        label = stringResource(Res.string.live_tv_continue, recentChannels.first().meta.name),
+                                        onClick = { openChannel(recentChannels.first().meta) },
+                                    )
+                                }
+                                if (sourceTitles.size > 1 || favoriteIds.isNotEmpty()) {
                                     LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                         item {
                                             CategoryChip(stringResource(Res.string.live_tv_all_channels), selectedSource == null) { selectedSource = null }
+                                        }
+                                        if (favoriteIds.isNotEmpty()) {
+                                            item {
+                                                CategoryChip(stringResource(Res.string.live_tv_favorites), selectedSource == FavoritesFilter) { selectedSource = FavoritesFilter }
+                                            }
                                         }
                                         items(sourceTitles.size) { index ->
                                             val title = sourceTitles[index]
@@ -213,9 +252,31 @@ fun LiveTvScreen(
                                         color = tokens.colors.textMuted,
                                     )
                                 }
+                                if (showRecents) {
+                                    Text(
+                                        text = stringResource(Res.string.live_tv_recent),
+                                        style = MaterialTheme.typography.titleSmall,
+                                        color = tokens.colors.textPrimary,
+                                        fontWeight = FontWeight.Bold,
+                                    )
+                                    LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                        rowItems(recentChannels, key = { it.key }) { channel ->
+                                            Box(modifier = Modifier.width(132.dp)) {
+                                                ChannelCard(
+                                                    channel = channel,
+                                                    favorite = channel.meta.id in favoriteIds,
+                                                    onToggleFavorite = { LiveTvRepository.toggleFavorite(channel.meta.id) },
+                                                    onClick = { openChannel(channel.meta) },
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
                                 if (filtered.isEmpty()) {
                                     Text(
-                                        text = stringResource(Res.string.live_tv_no_results),
+                                        text = stringResource(
+                                            if (selectedSource == FavoritesFilter && query.isBlank()) Res.string.live_tv_no_favorites else Res.string.live_tv_no_results,
+                                        ),
                                         style = MaterialTheme.typography.bodyMedium,
                                         color = tokens.colors.textMuted,
                                     )
@@ -223,7 +284,12 @@ fun LiveTvScreen(
                             }
                         }
                         items(filtered, key = { it.key }) { channel ->
-                            ChannelCard(channel, onClick = onChannelClick?.let { click -> { click(channel.meta) } })
+                            ChannelCard(
+                                channel = channel,
+                                favorite = channel.meta.id in favoriteIds,
+                                onToggleFavorite = { LiveTvRepository.toggleFavorite(channel.meta.id) },
+                                onClick = if (onChannelClick != null) ({ openChannel(channel.meta) }) else null,
+                            )
                         }
                     }
                 }
@@ -273,7 +339,12 @@ private fun CategoryChip(label: String, selected: Boolean, onClick: () -> Unit) 
 }
 
 @Composable
-private fun ChannelCard(channel: LiveTvChannel, onClick: (() -> Unit)?) {
+private fun ChannelCard(
+    channel: LiveTvChannel,
+    favorite: Boolean,
+    onToggleFavorite: () -> Unit,
+    onClick: (() -> Unit)?,
+) {
     val tokens = MaterialTheme.nuvio
     val logo = channel.meta.logo ?: channel.meta.poster ?: channel.meta.landscapePoster
     Surface(
@@ -285,6 +356,7 @@ private fun ChannelCard(channel: LiveTvChannel, onClick: (() -> Unit)?) {
         color = tokens.colors.surface,
         border = BorderStroke(1.dp, tokens.colors.borderSubtle),
     ) {
+        Box {
         Column(
             modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -342,6 +414,40 @@ private fun ChannelCard(channel: LiveTvChannel, onClick: (() -> Unit)?) {
                     overflow = TextOverflow.Ellipsis,
                 )
             }
+        }
+        Icon(
+            imageVector = if (favorite) Icons.Rounded.Star else Icons.Rounded.StarOutline,
+            contentDescription = stringResource(if (favorite) Res.string.live_tv_favorite_remove else Res.string.live_tv_favorite_add),
+            tint = if (favorite) tokens.colors.accent else tokens.colors.textMuted,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(4.dp)
+                .size(32.dp)
+                .clip(CircleShape)
+                .clickable(onClick = onToggleFavorite)
+                .padding(6.dp),
+        )
+        }
+    }
+}
+
+@Composable
+private fun ContinueButton(label: String, onClick: () -> Unit) {
+    val tokens = MaterialTheme.nuvio
+    Surface(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        color = tokens.colors.accent,
+        contentColor = Color(0xFF241502),
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Icon(imageVector = Icons.Rounded.PlayArrow, contentDescription = null, modifier = Modifier.size(22.dp))
+            Text(text = label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
     }
 }

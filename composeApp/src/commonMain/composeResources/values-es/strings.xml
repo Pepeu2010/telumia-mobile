@@ -2503,4 +2503,19 @@
     <string name="subtitle_shadow_opacity">Opacidad de la sombra</string>
     <string name="subtitle_shadow_size">Tamaño de la sombra</string>
     <string name="subtitle_reset_appearance">Restablecer apariencia</string>
+    <string name="live_tv_title">Live TV</string>
+    <string name="live_tv_all_channels">Todos los canales</string>
+    <string name="live_tv_loading">Cargando canales…</string>
+    <string name="live_tv_empty_title">Aún no hay canales</string>
+    <string name="live_tv_empty_message">Instala un addon con canales de TV en vivo (un catálogo de tipo tv) en Ajustes > Contenido y descubrimiento y los canales aparecerán aquí.</string>
+    <string name="live_tv_error">No se pudieron cargar algunos canales. Revisa tu conexión y el addon.</string>
+    <string name="live_tv_no_results">No se encontraron canales.</string>
+    <string name="live_tv_search_placeholder">Buscar canales…</string>
+    <string name="live_tv_favorites">Favoritos</string>
+    <string name="live_tv_recent">Vistos recientemente</string>
+    <string name="live_tv_continue">Continuar: %1$s</string>
+    <string name="live_tv_favorite_add">Añadir a favoritos</string>
+    <string name="live_tv_favorite_remove">Quitar de favoritos</string>
+    <string name="live_tv_no_favorites">Toca la estrella de un canal para guardarlo aquí.</string>
+    <string name="compose_nav_live_tv">Live TV</string>
 </resources>
